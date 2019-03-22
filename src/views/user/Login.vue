@@ -1,6 +1,6 @@
 <template>
     <div class="main">
-        <a-form id="formLogin" class="user-layout-login">
+        <a-form class="user-layout-login">
             <a-tabs :activeKey="customActiveKey" :tabBarStyle="{ textAlign: 'center', borderBottom: 'unset' }"
                     @change="handleTabClick">
                 <a-tab-pane key="tab1" tab="账号密码登陆">
@@ -32,7 +32,7 @@
                     </a-form-item>
                 </a-tab-pane>
                 <a-tab-pane key="tab2" tab="扫码登录">
-                    213
+                    扫码登录
                 </a-tab-pane>
             </a-tabs>
         </a-form>
@@ -41,8 +41,11 @@
 </template>
 <script>
     import {timeFix} from '@/utils/util'
+    import {axios} from '@/utils/request'
+    import qs from 'qs'
 
     export default {
+        name: 'login',
         data() {
             return {
                 customActiveKey: 'tab1',
@@ -77,6 +80,16 @@
                     password: this.userPass,
                     captcha: this.captcha,
                 }
+                axios({
+                    url: '/management/login',
+                    method: 'post',
+                    data: qs.stringify({loginParams})
+                }).then((res) => {
+                    console.log(res)
+                }).catch(err => this.requestFailed(err))
+                    .finally(() => {
+                        this.loginBtn = false
+                    })
                 console.log(loginParams)
             },
             loginSuccess(res) {
@@ -89,6 +102,7 @@
                 })
             },
             requestFailed(err) {
+                console.log(err)
                 this.$notification['error']({
                     message: '错误',
                     description: ((err.response || {}).data || {}).message || '请求出现错误，请稍后再试',
@@ -99,6 +113,10 @@
     }
 </script>
 
-<style scoped>
-
+<style lang="less" scoped>
+    .user-layout-login {
+        width: 380px;
+        margin: 0 auto;
+        margin-top: 25%;
+    }
 </style>

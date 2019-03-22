@@ -19,8 +19,7 @@ export const constantRouterMap = [
             }
         ],
         component: () => import('@/views/user/Login')
-    }
-    ,
+    },
     {
         path: '/404',
         component: () => import('@/views/exception/404')
