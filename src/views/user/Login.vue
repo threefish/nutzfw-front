@@ -1,16 +1,18 @@
 <template>
-    <div>login</div>
+    <div>
+        login2
+        <router-view/>
+    </div>
 </template>
 <script>
     import {notification} from 'ant-design-vue'
 
     export default {
-        name: "Login",
         data() {
             return {}
         },
         mounted() {
-            notification.info({message: 'Forbidden', description: "login"})
+            notification.info({message: '系统提示', description: "呵呵"})
         }
     }
 </script>

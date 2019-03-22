@@ -7,16 +7,18 @@ import {BasicLayout, BlankLayout} from '@/components/layouts'
  */
 export const constantRouterMap = [
     {
-        path: '/user',
-        hidden: true,
-        children: [
+        path: '/user/login',
+        name: 'login',
+        title: '系统登录',
+        children:[
             {
-                path: '/user/login',
-                name: 'login',
-                title: '系统登录',
-                component: () => import('@/views/user/Login')
+                path: '/user/sucess',
+                name: 'sucess',
+                title: '系统登录成功',
+                component: () => import('@/views/user/LoginSucess')
             }
-        ]
+        ],
+        component: () => import('@/views/user/Login')
     },
     {
         path: '/404',

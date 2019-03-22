@@ -10,7 +10,7 @@
             return {}
         },
         mounted() {
-            this.$router.push({name: 'login', params: {id: '1'}});
+            this.$router.push({name: 'login'});
         }
     }
 
