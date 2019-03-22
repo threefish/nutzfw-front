@@ -10,7 +10,7 @@ export const constantRouterMap = [
         path: '/user/login',
         name: 'login',
         title: '系统登录',
-        children:[
+        children: [
             {
                 path: '/user/sucess',
                 name: 'sucess',
@@ -19,7 +19,8 @@ export const constantRouterMap = [
             }
         ],
         component: () => import('@/views/user/Login')
-    },
+    }
+    ,
     {
         path: '/404',
         component: () => import('@/views/exception/404')
