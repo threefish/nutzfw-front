@@ -1,10 +1,17 @@
 <template>
     <div>login</div>
 </template>
-
 <script>
+    import {notification} from 'ant-design-vue'
+
     export default {
-        name: "Login"
+        name: "Login",
+        data() {
+            return {}
+        },
+        mounted() {
+            notification.info({message: 'Forbidden', description: "login"})
+        }
     }
 </script>
 
