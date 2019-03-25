@@ -9,33 +9,32 @@ export const constantRouterMap = [
     {
         path: '/user/login',
         name: 'login',
-        title: '系统登录',
-        children: [
-            {
-                path: '/user/sucess',
-                name: 'sucess',
-                title: '系统登录成功',
-                component: () => import('@/views/user/LoginSucess')
-            }
-        ],
+        hidden: true,
         component: () => import('@/views/user/Login')
     },
     {
-        path: '/dashboard',
-        name: 'dashboard',
-        title: '后台首页',
+        path: 'main',
+        name: 'main',
+        meta: {title: '后台管理', icon: 'form', permission: ['form']},
         children: [
             {
-                path: '/main/index',
-                name: 'index',
-                title: '系统登录成功',
-                component: () => import('@/views/user/LoginSucess')
+                path: '/dashboard',
+                name: 'dashboard',
+                meta: {title: '后台首页', icon: 'form', permission: ['form']},
+                component: () => import('@/views/index')
+            },
+            {
+                path: '/test',
+                name: 'test',
+                meta: {title: 'test', icon: 'form', permission: ['form']},
+                component: () => import('@/views/test')
             }
         ],
         component: BasicLayout
     },
     {
         path: '/404',
+        hidden: true,
         component: () => import('@/views/exception/404')
     }
 ]

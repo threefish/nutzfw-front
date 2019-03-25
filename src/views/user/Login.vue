@@ -51,8 +51,8 @@
                 loginBtn: false,
                 showCaptcha: false,
                 rememberMe: false,
-                userName: '',
-                userPass: '',
+                userName: 'admin',
+                userPass: '666666',
                 captcha: '',
             }
         },
@@ -93,7 +93,7 @@
                     // 延迟 1 秒显示欢迎信息
                     this.$notification.success({
                         message: '欢迎',
-                        description: `${timeFix()}，欢迎回来`
+                        description: `${timeFix()}，${res.data.realName}欢迎回来`
                     })
                 } else {
                     this.$notification.error({
