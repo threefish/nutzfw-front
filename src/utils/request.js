@@ -2,6 +2,7 @@ import Vue from 'vue'
 import axios from 'axios'
 import store from '@/store'
 import {VueAxios} from './axios'
+import qs from 'qs'
 import notification from 'ant-design-vue/es/notification'
 
 export const ACCESS_TOKEN = 'Access-Token'
@@ -17,10 +18,10 @@ const err = (error) => {
         const data = error.response.data
         const token = Vue.ls.get(ACCESS_TOKEN)
         if (error.response.status === 403) {
-            notification.error({message: 'Forbidden', description: data.message})
+            notification.error({message: '403 访问被禁止', description: data.message})
         }
         if (error.response.status === 401) {
-            notification.error({message: 'Unauthorized', description: 'Authorization verification failed'})
+            notification.error({message: '401 权限不足', description: '授权验证失败'})
             if (token) {
                 store.dispatch('Logout').then(() => {
                     setTimeout(() => {
@@ -45,6 +46,7 @@ service.interceptors.request.use(config => {
 
 // response interceptor
 service.interceptors.response.use((response) => {
+    console.log(response)
     return response.data
 }, err)
 
@@ -55,7 +57,16 @@ const installer = {
     }
 }
 
+function post(url,parameter) {
+    return service({
+        url: url,
+        method: 'post',
+        data: qs.stringify(parameter)
+    })
+}
+
 export {
     installer as VueAxios,
-    service as axios
+    service as axios,
+    post as post,
 }

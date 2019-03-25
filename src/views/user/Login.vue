@@ -41,8 +41,7 @@
 </template>
 <script>
     import {timeFix} from '@/utils/util'
-    import {axios} from '@/utils/request'
-    import qs from 'qs'
+    import {login, checkshowCaptcha} from '@/api/login'
 
     export default {
         name: 'login',
@@ -58,52 +57,54 @@
             }
         },
         mounted() {
-            this.$notification.info({message: '系统提示', description: "呵呵"})
         },
         methods: {
             rememberMeChange(e) {
                 this.rememberMe = e.target.checked;
             },
+            getLoginData() {
+                return {
+                    username: this.userName,
+                    password: this.userPass,
+                    captcha: this.captcha,
+                    rememberMe: this.rememberMe,
+                }
+            },
             handleCheckCaptcha() {
                 const loginParams = {
-                    username: this.userName,
-                    password: this.userPass
+                    username: this.userName
                 }
-                console.log(loginParams)
+                checkshowCaptcha(loginParams).then((res) => {
+                    this.showCaptcha = res.data;
+                })
             },
             handleTabClick(key) {
                 this.customActiveKey = key
             },
             handleSubmit() {
-                const loginParams = {
-                    username: this.userName,
-                    password: this.userPass,
-                    captcha: this.captcha,
-                }
-                axios({
-                    url: '/management/login',
-                    method: 'post',
-                    data: qs.stringify({loginParams})
-                }).then((res) => {
-                    console.log(res)
-                }).catch(err => this.requestFailed(err))
-                    .finally(() => {
-                        this.loginBtn = false
-                    })
-                console.log(loginParams)
+                this.loginBtn = true
+                const loginParams = this.getLoginData();
+                login(loginParams).then((res) => this.loginSuccess(res)).catch(err => this.requestFailed(err)).finally(() => this.loginBtn = false)
             },
             loginSuccess(res) {
                 console.log(res)
-                this.$router.push({name: 'dashboard'})
-                // 延迟 1 秒显示欢迎信息
-                this.$notification.success({
-                    message: '欢迎',
-                    description: `${timeFix()}，欢迎回来`
-                })
+                if (res.ok) {
+                    this.$router.push({name: 'dashboard'})
+                    // 延迟 1 秒显示欢迎信息
+                    this.$notification.success({
+                        message: '欢迎',
+                        description: `${timeFix()}，欢迎回来`
+                    })
+                } else {
+                    this.$notification.error({
+                        message: '登录失败',
+                        description: res.msg
+                    })
+                }
             },
             requestFailed(err) {
                 console.log(err)
-                this.$notification['error']({
+                this.$notification.error({
                     message: '错误',
                     description: ((err.response || {}).data || {}).message || '请求出现错误，请稍后再试',
                     duration: 4
