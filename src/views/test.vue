@@ -1,6 +1,9 @@
-<template>
+<template xmlns:v-auth="">
     <div>
-        test {{targetTime}}
+        test {{targetTime}} 权限测试
+        <div>
+            <a-button v-auth="{ p: 'sysMenu.autoAdd' }" @click="handleStartJob">启动定时任务</a-button>
+        </div>
     </div>
 </template>
 
@@ -12,7 +15,11 @@
                 targetTime: new Date()
             }
         },
-        methods: {}
+        methods: {
+            handleStartJob(){
+                this.$message.info("启动定时任务")
+            }
+        }
     }
 </script>
 

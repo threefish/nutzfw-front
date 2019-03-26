@@ -1,7 +1,9 @@
 <template>
     <a-layout class="layout">
-        <a-layout-header class="ant-header-fixedHeader">
-            XX系统
+        <a-layout-header class="ant-header-fixedHeader ant-header-side-opened">
+            <a-icon class="trigger"
+                    :type="collapsed ? 'menu-fold' : 'menu-unfold'"
+                    @click="toggle"></a-icon>
         </a-layout-header>
         <a-layout class="ant-layout-has-sider">
             <a-layout-sider width="250" style="background: #fff">
@@ -33,9 +35,22 @@
                 menus: constantRouterMap
             }
         },
-        methods: {},
+        methods: {
+            toggle() {
+                this.$emit('toggle')
+            }
+        },
     }
 </script>
 <style lang="less">
-
+    .trigger {
+        font-size: 20px;
+        line-height: 64px;
+        padding: 0 24px;
+        cursor: pointer;
+        transition: color .3s;
+        &:hover {
+            background: rgba(0, 0, 0, 0.025);
+        }
+    }
 </style>
