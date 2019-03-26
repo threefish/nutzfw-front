@@ -1,5 +1,32 @@
 // eslint-disable-next-line
-import {BasicLayout, BlankLayout} from '@/components/layouts'
+import {BasicLayout, BlankLayout, RouteView} from '@/components/layouts'
+
+export const asyncRouterMap = [
+    {
+        path: '/',
+        name: 'main',
+        meta: {title: '后台管理', icon: 'form', permissions: ['dashboard']},
+        component: BasicLayout,
+        children: [
+            {
+                path: '/dashboard',
+                name: 'dashboard',
+                meta: {title: '后台首页', icon: 'form', permissions: ['form']},
+                component: () => import('@/views/index')
+            },
+            {
+                path: '/test',
+                name: 'test',
+                meta: {title: 'test', icon: 'form', permissions: ['form']},
+                component: () => import('@/views/test')
+            }
+        ],
+    },
+    {
+        path: '*', redirect: '/404', hidden: true
+    }
+]
+
 
 /**
  * 基础路由
@@ -11,26 +38,6 @@ export const constantRouterMap = [
         name: 'login',
         hidden: true,
         component: () => import('@/views/user/Login')
-    },
-    {
-        path: 'main',
-        name: 'main',
-        meta: {title: '后台管理', icon: 'form', permission: ['form']},
-        children: [
-            {
-                path: '/dashboard',
-                name: 'dashboard',
-                meta: {title: '后台首页', icon: 'form', permission: ['form']},
-                component: () => import('@/views/index')
-            },
-            {
-                path: '/test',
-                name: 'test',
-                meta: {title: 'test', icon: 'form', permission: ['form']},
-                component: () => import('@/views/test')
-            }
-        ],
-        component: BasicLayout
     },
     {
         path: '/404',

@@ -41,6 +41,7 @@
 </template>
 <script>
     import {timeFix} from '@/utils/util'
+    import {mapActions} from 'vuex'
     import {login, checkshowCaptcha} from '@/api/login'
 
     export default {
@@ -59,6 +60,7 @@
         mounted() {
         },
         methods: {
+            ...mapActions(['Login', 'Logout']),
             rememberMeChange(e) {
                 this.rememberMe = e.target.checked;
             },
@@ -82,9 +84,10 @@
                 this.customActiveKey = key
             },
             handleSubmit() {
+                const {Login} = this
                 this.loginBtn = true
                 const loginParams = this.getLoginData();
-                login(loginParams).then((res) => this.loginSuccess(res)).catch(err => this.requestFailed(err)).finally(() => this.loginBtn = false)
+                Login(loginParams).then((res) => this.loginSuccess(res)).catch(err => this.requestFailed(err)).finally(() => this.loginBtn = false)
             },
             loginSuccess(res) {
                 console.log(res)

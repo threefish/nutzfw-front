@@ -1,8 +1,8 @@
 <template xmlns:v-auth="">
     <div>
-        test {{targetTime}} 权限测试
+        {{targetTime}}
         <div>
-            <a-button v-auth="{ p: 'sysMenu.autoAdd' }" @click="handleStartJob">启动定时任务</a-button>
+            <a-button v-auth="{ p: 'sysMenu.autoAdd' }" @click="handleStartJob">指令权限控制测试</a-button>
         </div>
     </div>
 </template>
@@ -17,7 +17,7 @@
         },
         methods: {
             handleStartJob(){
-                this.$message.info("启动定时任务")
+                this.$message.info("指令权限控制测试")
             }
         }
     }

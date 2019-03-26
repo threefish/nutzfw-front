@@ -4,8 +4,7 @@ import store from '@/store'
 import {VueAxios} from './axios'
 import qs from 'qs'
 import notification from 'ant-design-vue/es/notification'
-
-export const ACCESS_TOKEN = 'Access-Token'
+import {ACCESS_TOKEN} from '@/store/mutation-types'
 
 // 创建 axios 实例
 const service = axios.create({
@@ -65,8 +64,17 @@ function post(url,parameter) {
     })
 }
 
+function get(url,parameter) {
+    return service({
+        url: url,
+        method: 'get',
+        data: qs.stringify(parameter)
+    })
+}
+
 export {
     installer as VueAxios,
     service as axios,
     post as post,
+    get as get,
 }
