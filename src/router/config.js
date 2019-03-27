@@ -7,6 +7,7 @@ export const asyncRouterMap = [
         name: 'index',
         component: BasicLayout,
         meta: {title: '后台管理', icon: 'form', permissions: ['sysMenu.autoAdd']},
+        redirect: '/dashboard',
         children: [
             {
                 path: '/dashboard',
