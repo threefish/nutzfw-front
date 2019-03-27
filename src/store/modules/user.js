@@ -9,7 +9,7 @@ const user = {
         name: '',
         welcome: '',
         avatar: '',
-        roles: [],
+        auth: {},
         info: {}
     },
 
@@ -24,8 +24,8 @@ const user = {
         SET_AVATAR: (state, avatar) => {
             state.avatar = avatar
         },
-        SET_ROLES: (state, roles) => {
-            state.roles = roles
+        SET_AUTH: (state, auth) => {
+            state.auth = auth
         },
         SET_INFO: (state, info) => {
             state.info = info
@@ -52,7 +52,7 @@ const user = {
                     const auth = response.data.auth
                     const user = response.data.user
                     if (auth.roles && auth.stringPermissions.length > 0) {
-                        commit('SET_ROLES', auth)
+                        commit('SET_AUTH', auth)
                         commit('SET_INFO', user)
                     } else {
                         reject(new Error('getInfo: roles must be a non-null array !'))
@@ -69,7 +69,7 @@ const user = {
         Logout({commit, state}) {
             return new Promise((resolve) => {
                 commit('SET_TOKEN', '')
-                commit('SET_ROLES', [])
+                commit('SET_AUTH', {})
                 Vue.ls.remove(ACCESS_TOKEN)
                 logout(state.token).then(() => {
                     resolve()

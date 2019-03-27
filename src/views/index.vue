@@ -1,23 +1,28 @@
 <template>
     <div>
-        index {{targetTime}}
-        <router-link :to="{name:'test'}">测试</router-link>
+        <a-card class="card" title="首页卡片" :bordered="false">
+          首页卡片
+        </a-card>
     </div>
 </template>
 
 <script>
+
     export default {
-        components: {},
+        components: {
+        },
         data() {
             return {
-                targetTime: new Date()
+                loading: false,
             }
         },
-        methods: {}
+        methods: {
+        }
     }
 </script>
 
 <style lang="less" scoped>
-
-
+    .card {
+        margin-bottom: 24px;
+    }
 </style>

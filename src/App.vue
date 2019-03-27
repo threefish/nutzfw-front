@@ -34,7 +34,6 @@
                         $store.dispatch('setSidebar', true)
                         break
                 }
-                this.$router.push({name: 'login'});
             })
         }
     }

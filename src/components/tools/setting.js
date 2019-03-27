@@ -53,7 +53,6 @@ const updateTheme = primaryColor => {
           hideMessage()
         })
         .catch((e) => {
-            console.log(e)
           message.error('Failed to update theme')
           hideMessage()
         })
