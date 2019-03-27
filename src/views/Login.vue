@@ -118,8 +118,15 @@
 
 <style lang="less" scoped>
     .user-layout-login {
-        width: 380px;
-        margin: 0 auto;
-        margin-top: 25%;
+        label {
+            font-size: 14px;
+        }
+
+        button.login-button {
+            padding: 0 15px;
+            font-size: 16px;
+            height: 40px;
+            width: 100%;
+        }
     }
 </style>

@@ -1,7 +1,7 @@
 <template xmlns:v-auth="">
     <div>
         {{targetTime}}
-        <div>
+        <div style="height: 999px;background: darkgreen">
             <a-button v-auth="{ p: 'sysMenu.autoAdd' }" @click="handleStartJob">指令权限控制测试</a-button>
         </div>
     </div>

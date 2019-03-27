@@ -16,7 +16,7 @@ const app = {
   state: {
     sidebar: true,
     device: 'desktop',
-    theme: '',
+    theme: 'dark',
     layout: '',
     contentWidth: '',
     fixedHeader: false,
@@ -30,8 +30,6 @@ const app = {
     SET_SIDEBAR_TYPE: (state, type) => {
       state.sidebar = type
       Vue.ls.set(SIDEBAR_TYPE, type)
-
-      console.log('SET_SIDEBAR_TYPE', type)
     },
     CLOSE_SIDEBAR: (state) => {
       Vue.ls.set(SIDEBAR_TYPE, true)
@@ -41,7 +39,6 @@ const app = {
       state.device = device
     },
     TOGGLE_THEME: (state, theme) => {
-      // setStore('_DEFAULT_THEME', theme)
       Vue.ls.set(DEFAULT_THEME, theme)
       state.theme = theme
     },

@@ -44,10 +44,7 @@ service.interceptors.request.use(config => {
 }, err)
 
 // response interceptor
-service.interceptors.response.use((response) => {
-    console.log(response)
-    return response.data
-}, err)
+service.interceptors.response.use((response) => response.data, err)
 
 const installer = {
     vm: {},

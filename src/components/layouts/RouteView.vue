@@ -6,6 +6,7 @@ export default {
   },
   render () {
     const { $route: { meta }, $store: { getters } } = this
+
     const inKeep = (<keep-alive><router-view /></keep-alive>)
     const notKeep = (<router-view />)
     // 这里增加了 multiTab 的判断，当开启了 multiTab 时
