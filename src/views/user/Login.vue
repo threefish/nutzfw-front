@@ -42,7 +42,7 @@
 <script>
     import {timeFix} from '@/utils/util'
     import {mapActions} from 'vuex'
-    import {login, checkshowCaptcha} from '@/api/login'
+    import {checkshowCaptcha} from '@/api/login'
 
     export default {
         name: 'login',
@@ -90,7 +90,6 @@
                 Login(loginParams).then((res) => this.loginSuccess(res)).catch(err => this.requestFailed(err)).finally(() => this.loginBtn = false)
             },
             loginSuccess(res) {
-                console.log(res)
                 if (res.ok) {
                     this.$router.push({name: 'dashboard'})
                     // 延迟 1 秒显示欢迎信息
