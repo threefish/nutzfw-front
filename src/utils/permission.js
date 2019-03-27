@@ -23,7 +23,6 @@ router.beforeEach((to, from, next) => {
                 store
                     .dispatch('GetInfo')
                     .then(res => {
-                        console.log("permission.js",res)
                         const auth = res.data.auth
                         store.dispatch('GenerateRoutes', { auth }).then(() => {
                             // 根据roles权限生成可访问的路由表
@@ -31,7 +30,7 @@ router.beforeEach((to, from, next) => {
                             router.addRoutes(store.getters.addRouters)
                             const redirect = decodeURIComponent(from.query.redirect || to.path)
                             if (to.path === redirect) {
-                                // hack方法 确保addRoutes已完成 ,set the replace: true so the navigation will not leave a history record
+                                // hack方法 确保addRoutes已完成 ,设置replace：true，以便导航不会留下历史记录
                                 next({ ...to, replace: true })
                             } else {
                                 // 跳转到目的路由
