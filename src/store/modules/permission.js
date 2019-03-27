@@ -30,8 +30,8 @@ function hasPermission(stringPermissions, route) {
  */
 // eslint-disable-next-line
 function hasRole(auth, route) {
-    if (route.meta && route.meta.auth) {
-        return route.meta.auth.includes(auth.id)
+    if (route.meta && route.meta.roles) {
+        return route.meta.roles.includes(auth.id)
     } else {
         return true
     }
